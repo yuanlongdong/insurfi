@@ -1,23 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
+import { useAccount, useReadContract, useWriteContract } from "wagmi";
 import { TrendingDown, Search, CheckCircle, XCircle, Loader2, AlertCircle, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { CONTRACT_ADDRESSES, LOSS_VERIFIER_ABI, DEX_ROUTER_ABI } from "@/lib/contracts";
 import { formatBNB, formatAddress } from "@/lib/utils";
-
-tradeInfo: {
-  id: bigint;
-  trader: string;
-  tokenIn: string;
-  tokenOut: string;
-  amountIn: bigint;
-  amountOut: bigint;
-  blockNumber: bigint;
-  timestamp: bigint;
-  isBuy: boolean;
-} | null;
 
 export default function ClaimPage() {
   const { address, isConnected } = useAccount();
@@ -28,15 +16,13 @@ export default function ClaimPage() {
 
   const { writeContract, isPending: isWriting } = useWriteContract();
 
-  // Preview loss calculation
-  const { data: lossPreview, isLoading: isCalculating } = useReadContract({
+  const { data: lossPreview } = useReadContract({
     address: CONTRACT_ADDRESSES.lossVerifier as `0x${string}` || undefined,
     abi: LOSS_VERIFIER_ABI,
     functionName: "calculateLoss",
     args: buyTradeId && sellTradeId ? [BigInt(buyTradeId), BigInt(sellTradeId)] : undefined,
   });
 
-  // Fetch buy trade info
   const { data: buyTrade } = useReadContract({
     address: CONTRACT_ADDRESSES.dexRouter as `0x${string}` || undefined,
     abi: DEX_ROUTER_ABI,
@@ -44,7 +30,6 @@ export default function ClaimPage() {
     args: buyTradeId ? [BigInt(buyTradeId)] : undefined,
   });
 
-  // Fetch sell trade info
   const { data: sellTrade } = useReadContract({
     address: CONTRACT_ADDRESSES.dexRouter as `0x${string}` || undefined,
     abi: DEX_ROUTER_ABI,
@@ -90,11 +75,10 @@ export default function ClaimPage() {
       <h1 className="text-3xl font-bold">申请理赔</h1>
       <p className="mt-2 text-gray-500">提交买入和卖出交易 ID，系统自动校验亏损并执行赔付</p>
 
-      {/* Step indicator */}
       <div className="mt-8 flex items-center gap-4">
         {["输入交易 ID", "校验亏损", "确认赔付"].map((s, i) => (
           <div key={s} className="flex items-center gap-2">
-            <div className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold ${step === "input" && i === 0 || step === "verifying" && i <= 1 || step === "result" ? "bg-primary-600 text-white" : "bg-dark-700 text-gray-500"}`}>
+            <div className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold ${(step === "input" && i === 0) || (step === "verifying" && i <= 1) || step === "result" ? "bg-primary-600 text-white" : "bg-dark-700 text-gray-500"}`}>
               {i + 1}
             </div>
             <span className={`text-sm ${i <= (step === "input" ? 0 : step === "verifying" ? 1 : 2) ? "text-white" : "text-gray-500"}`}>{s}</span>
@@ -103,35 +87,30 @@ export default function ClaimPage() {
         ))}
       </div>
 
-      {/* Input Form */}
       {step === "input" && (
         <div className="mt-8 glass-card p-6">
           <div className="space-y-6">
             <div>
               <label className="text-sm font-medium text-gray-300">买入交易 ID (Buy Trade ID)</label>
               <p className="mt-1 text-xs text-gray-500">通过 InsurFi DEX 代理买入代币的交易编号</p>
-              <div className="mt-2 flex gap-2">
-                <input
-                  type="number"
-                  value={buyTradeId}
-                  onChange={(e) => setBuyTradeId(e.target.value)}
-                  placeholder="例如: 1"
-                  className="flex-1 rounded-lg border border-dark-600 bg-dark-800 px-4 py-3 text-white placeholder-gray-600 focus:border-primary-500 focus:outline-none"
-                />
-              </div>
+              <input
+                type="number"
+                value={buyTradeId}
+                onChange={(e) => setBuyTradeId(e.target.value)}
+                placeholder="例如: 1"
+                className="mt-2 w-full rounded-lg border border-dark-600 bg-dark-800 px-4 py-3 text-white placeholder-gray-600 focus:border-primary-500 focus:outline-none"
+              />
             </div>
             <div>
               <label className="text-sm font-medium text-gray-300">卖出交易 ID (Sell Trade ID)</label>
               <p className="mt-1 text-xs text-gray-500">通过 InsurFi DEX 代理卖出代币的交易编号</p>
-              <div className="mt-2 flex gap-2">
-                <input
-                  type="number"
-                  value={sellTradeId}
-                  onChange={(e) => setSellTradeId(e.target.value)}
-                  placeholder="例如: 2"
-                  className="flex-1 rounded-lg border border-dark-600 bg-dark-800 px-4 py-3 text-white placeholder-gray-600 focus:border-primary-500 focus:outline-none"
-                />
-              </div>
+              <input
+                type="number"
+                value={sellTradeId}
+                onChange={(e) => setSellTradeId(e.target.value)}
+                placeholder="例如: 2"
+                className="mt-2 w-full rounded-lg border border-dark-600 bg-dark-800 px-4 py-3 text-white placeholder-gray-600 focus:border-primary-500 focus:outline-none"
+              />
             </div>
             {error && <p className="text-sm text-red-400">{error}</p>}
             <button onClick={handleVerify} className="btn-primary flex w-full items-center justify-center gap-2">
@@ -139,7 +118,6 @@ export default function ClaimPage() {
             </button>
           </div>
 
-          {/* Guide */}
           <div className="mt-6 rounded-lg border border-dark-700 bg-dark-800/50 p-4">
             <h4 className="text-sm font-semibold text-gray-300">理赔指南</h4>
             <ul className="mt-2 space-y-1 text-xs text-gray-500">
@@ -153,7 +131,6 @@ export default function ClaimPage() {
         </div>
       )}
 
-      {/* Verifying */}
       {step === "verifying" && (
         <div className="mt-8 glass-card flex flex-col items-center p-12">
           <Loader2 className="h-12 w-12 animate-spin text-primary-400" />
@@ -162,10 +139,8 @@ export default function ClaimPage() {
         </div>
       )}
 
-      {/* Result */}
       {step === "result" && (
         <div className="mt-8 space-y-6">
-          {/* Trade details */}
           <div className="glass-card p-6">
             <h3 className="text-lg font-semibold">交易详情</h3>
             <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -192,7 +167,6 @@ export default function ClaimPage() {
             </div>
           </div>
 
-          {/* Loss & Payout */}
           <div className="glass-card p-6">
             {isValid ? (
               <>
