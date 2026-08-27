@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>InsurFi - BSC 链上交易亏损保险协议</title>
 <meta name="description" content="持有 INSUR 代币即自动激活保单，DEX 交易亏损后一键理赔，BNB 秒到账。BSC 链上首个交易亏损保险 DeFi 协议。">
 <style>
@@ -12,182 +12,177 @@
     --border: #2a2a3a; --border-hover: #6366f1;
     --text: #ffffff; --text-muted: #9ca3af; --text-dim: #6b7280;
     --primary: #6366f1; --primary-light: #818cf8; --primary-dark: #4f46e5;
-    --cyan: #22d3ee; --green: #4ade80; --yellow: #facc15; --red: #f87171; --orange: #fb923c;
+    --cyan: #22d3ee; --green: #4ade80;
   }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
   a { color: inherit; text-decoration: none; }
-  .container { max-width: 1152px; margin: 0 auto; padding: 0 24px; }
+  .container { max-width: 1152px; margin: 0 auto; padding: 0 20px; }
 
-  /* ===== Navbar ===== */
-  .navbar { position: sticky; top: 0; z-index: 50; background: rgba(10,10,15,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(42,42,58,0.5); }
-  .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 20px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+  /* ===== Navbar - 默认移动端样式，大屏覆盖 ===== */
+  .navbar { position: sticky; top: 0; z-index: 50; background: rgba(10,10,15,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(42,42,58,0.5); }
+  .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 20px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
   .logo { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; flex-shrink: 0; }
-  .logo-icon { width: 34px; height: 34px; background: linear-gradient(135deg, var(--primary), var(--cyan)); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .logo-icon svg { width: 20px; height: 20px; color: white; }
-  .nav-links { display: flex; align-items: center; gap: 2px; }
-  .nav-links a { padding: 8px 14px; border-radius: 8px; font-size: 14px; font-weight: 500; color: var(--text-muted); transition: all 0.2s; white-space: nowrap; }
-  .nav-links a:hover { background: rgba(42,42,58,0.5); color: var(--text); }
-  .nav-cta { background: var(--primary); color: white !important; padding: 8px 18px !important; border-radius: 8px; font-size: 14px; font-weight: 600; margin-left: 8px; }
-  .nav-cta:hover { background: var(--primary-dark) !important; }
-  .mobile-menu-btn { display: none; background: none; border: 1px solid var(--border); color: var(--text-muted); cursor: pointer; padding: 8px; border-radius: 8px; flex-shrink: 0; }
+  .logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--primary), var(--cyan)); border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .logo-icon svg { width: 18px; height: 18px; color: white; }
+  /* 导航链接默认隐藏 */
+  .nav-links { display: none; }
+  /* 汉堡菜单默认显示 */
+  .mobile-menu-btn { display: flex; align-items: center; justify-content: center; background: none; border: 1px solid var(--border); color: var(--text-muted); cursor: pointer; padding: 7px; border-radius: 8px; flex-shrink: 0; }
   .mobile-menu-btn:hover { background: rgba(42,42,58,0.5); color: white; }
-  .mobile-menu { display: none; position: absolute; top: 60px; left: 0; right: 0; background: rgba(10,10,15,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(42,42,58,0.5); padding: 12px 20px; z-index: 49; }
+  .mobile-menu { display: none; position: absolute; top: 58px; left: 0; right: 0; background: rgba(10,10,15,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(42,42,58,0.5); padding: 10px 16px; z-index: 49; }
   .mobile-menu.open { display: block; }
-  .mobile-menu a { display: block; padding: 12px 16px; border-radius: 8px; font-size: 15px; font-weight: 500; color: var(--text-muted); transition: all 0.2s; }
+  .mobile-menu a { display: block; padding: 12px 14px; border-radius: 8px; font-size: 15px; font-weight: 500; color: var(--text-muted); transition: all 0.15s; }
   .mobile-menu a:hover { background: rgba(42,42,58,0.5); color: white; }
-  .mobile-menu .nav-cta { display: block; text-align: center; margin-top: 8px; padding: 12px !important; }
+  .mobile-menu .menu-cta { display: block; text-align: center; margin-top: 8px; padding: 12px !important; background: var(--primary); color: white !important; border-radius: 10px; font-weight: 600; }
+
+  /* 大屏（≥1025px）显示导航链接，隐藏汉堡菜单 */
+  @media (min-width: 1025px) {
+    .nav-links { display: flex; align-items: center; gap: 2px; }
+    .nav-links a { padding: 7px 13px; border-radius: 8px; font-size: 14px; font-weight: 500; color: var(--text-muted); transition: all 0.15s; white-space: nowrap; }
+    .nav-links a:hover { background: rgba(42,42,58,0.5); color: var(--text); }
+    .nav-links .menu-cta { background: var(--primary); color: white !important; padding: 7px 16px !important; margin-left: 6px; font-weight: 600; }
+    .nav-links .menu-cta:hover { background: var(--primary-dark) !important; }
+    .mobile-menu-btn { display: none; }
+  }
 
   /* ===== Hero ===== */
-  .hero { position: relative; padding: 60px 0 80px; text-align: center; overflow: hidden; }
+  .hero { position: relative; padding: 56px 0 72px; text-align: center; overflow: hidden; }
   .hero-bg { position: absolute; inset: 0; pointer-events: none; }
-  .hero-glow-1 { position: absolute; top: -120px; left: 50%; transform: translateX(-50%); width: 600px; height: 500px; background: radial-gradient(circle, rgba(99,102,241,0.12), transparent 70%); filter: blur(60px); }
-  .hero-glow-2 { position: absolute; top: 60px; right: 0; width: 250px; height: 250px; background: radial-gradient(circle, rgba(34,211,238,0.06), transparent 70%); filter: blur(40px); }
-  .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 999px; border: 1px solid rgba(99,102,241,0.3); background: rgba(99,102,241,0.08); font-size: 13px; color: var(--primary-light); }
-  .hero h1 { font-size: 48px; font-weight: 800; line-height: 1.15; margin-top: 28px; letter-spacing: -0.02em; }
+  .hero-glow-1 { position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 500px; height: 400px; background: radial-gradient(circle, rgba(99,102,241,0.1), transparent 70%); filter: blur(50px); }
+  .hero-badge { display: inline-flex; align-items: center; gap: 7px; padding: 7px 16px; border-radius: 999px; border: 1px solid rgba(99,102,241,0.3); background: rgba(99,102,241,0.08); font-size: 13px; color: var(--primary-light); }
+  .hero h1 { font-size: 40px; font-weight: 800; line-height: 1.2; margin-top: 24px; letter-spacing: -0.02em; }
   .hero-gradient { background: linear-gradient(135deg, var(--primary-light), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .hero p { max-width: 600px; margin: 20px auto 0; font-size: 16px; color: var(--text-muted); line-height: 1.8; }
-  .hero-cta { display: flex; gap: 14px; justify-content: center; margin-top: 36px; flex-wrap: wrap; }
-  .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: var(--primary); color: white; border-radius: 12px; font-size: 15px; font-weight: 600; transition: all 0.2s; border: none; cursor: pointer; }
-  .btn-primary:hover { background: var(--primary-dark); box-shadow: 0 8px 30px rgba(99,102,241,0.3); transform: translateY(-1px); }
-  .btn-outline { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border: 1px solid var(--border); color: white; border-radius: 12px; font-size: 15px; font-weight: 600; transition: all 0.2s; background: transparent; cursor: pointer; }
+  .hero p { max-width: 560px; margin: 18px auto 0; font-size: 15px; color: var(--text-muted); line-height: 1.8; }
+  .hero-cta { display: flex; gap: 12px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 7px; padding: 13px 26px; background: var(--primary); color: white; border-radius: 11px; font-size: 15px; font-weight: 600; transition: all 0.15s; border: none; cursor: pointer; }
+  .btn-primary:hover { background: var(--primary-dark); box-shadow: 0 6px 24px rgba(99,102,241,0.3); }
+  .btn-outline { display: inline-flex; align-items: center; gap: 7px; padding: 13px 26px; border: 1px solid var(--border); color: white; border-radius: 11px; font-size: 15px; font-weight: 600; transition: all 0.15s; background: transparent; cursor: pointer; }
   .btn-outline:hover { border-color: var(--primary); color: var(--primary-light); }
-  .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 700px; margin: 56px auto 0; }
-  .hero-stat h3 { font-size: 28px; font-weight: 700; }
-  .hero-stat p { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+  .hero-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 500px; margin: 48px auto 0; }
+  .hero-stat h3 { font-size: 26px; font-weight: 700; }
+  .hero-stat p { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+  @media (min-width: 640px) {
+    .hero h1 { font-size: 52px; }
+    .hero-stats { grid-template-columns: repeat(4, 1fr); max-width: 700px; }
+  }
 
   /* ===== Section ===== */
-  .section { padding: 80px 0; }
-  .section-alt { background: rgba(18,18,26,0.4); border-top: 1px solid rgba(42,42,58,0.4); border-bottom: 1px solid rgba(42,42,58,0.4); }
-  .section-header { text-align: center; margin-bottom: 56px; }
-  .section-header h2 { font-size: 32px; font-weight: 700; }
-  .section-header p { max-width: 600px; margin: 14px auto 0; color: var(--text-muted); font-size: 15px; }
+  .section { padding: 64px 0; }
+  .section-alt { background: rgba(18,18,26,0.35); border-top: 1px solid rgba(42,42,58,0.35); border-bottom: 1px solid rgba(42,42,58,0.35); }
+  .section-header { text-align: center; margin-bottom: 44px; }
+  .section-header h2 { font-size: 28px; font-weight: 700; }
+  .section-header p { max-width: 560px; margin: 12px auto 0; color: var(--text-muted); font-size: 14px; }
+  @media (min-width: 640px) { .section { padding: 80px 0; } .section-header h2 { font-size: 34px; } }
 
   /* ===== Features ===== */
-  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .feature-card { background: var(--bg-card); border: 1px solid rgba(42,42,58,0.5); border-radius: 16px; padding: 24px; transition: all 0.3s; }
+  .features-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 640px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1025px) { .features-grid { grid-template-columns: repeat(3, 1fr); } }
+  .feature-card { background: var(--bg-card); border: 1px solid rgba(42,42,58,0.5); border-radius: 14px; padding: 22px; transition: all 0.2s; }
   .feature-card:hover { border-color: rgba(99,102,241,0.3); transform: translateY(-2px); }
-  .feature-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
-  .feature-icon svg { width: 22px; height: 22px; }
-  .feature-card h3 { font-size: 18px; font-weight: 600; margin-top: 18px; }
-  .feature-card p { font-size: 14px; color: var(--text-muted); margin-top: 10px; line-height: 1.7; }
+  .feature-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .feature-icon svg { width: 20px; height: 20px; }
+  .feature-card h3 { font-size: 17px; font-weight: 600; margin-top: 16px; }
+  .feature-card p { font-size: 13px; color: var(--text-muted); margin-top: 8px; line-height: 1.7; }
 
-  /* ===== How it works ===== */
-  .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .step-card { background: var(--bg-card); border: 1px solid rgba(42,42,58,0.5); border-radius: 16px; padding: 28px; position: relative; }
-  .step-number { font-size: 42px; font-weight: 800; color: rgba(42,42,58,0.7); }
-  .step-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(99,102,241,0.1); display: flex; align-items: center; justify-content: center; position: absolute; top: 28px; right: 28px; }
-  .step-icon svg { width: 22px; height: 22px; color: var(--primary-light); }
-  .step-card h3 { font-size: 18px; font-weight: 600; margin-top: 20px; }
-  .step-card p { font-size: 14px; color: var(--text-muted); margin-top: 10px; line-height: 1.7; }
+  /* ===== Steps ===== */
+  .steps-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  @media (min-width: 1025px) { .steps-grid { grid-template-columns: repeat(3, 1fr); } }
+  .step-card { background: var(--bg-card); border: 1px solid rgba(42,42,58,0.5); border-radius: 14px; padding: 26px; position: relative; }
+  .step-number { font-size: 38px; font-weight: 800; color: rgba(42,42,58,0.6); }
+  .step-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(99,102,241,0.1); display: flex; align-items: center; justify-content: center; position: absolute; top: 26px; right: 26px; }
+  .step-icon svg { width: 20px; height: 20px; color: var(--primary-light); }
+  .step-card h3 { font-size: 17px; font-weight: 600; margin-top: 18px; }
+  .step-card p { font-size: 13px; color: var(--text-muted); margin-top: 8px; line-height: 1.7; }
 
-  /* ===== Policy tiers ===== */
-  .tiers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .tier-card { background: var(--bg-card); border: 1px solid rgba(42,42,58,0.5); border-radius: 16px; padding: 28px; position: relative; }
-  .tier-card.popular { border-color: rgba(99,102,241,0.5); box-shadow: 0 0 0 1px rgba(99,102,241,0.15); }
-  .tier-badge { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--primary), var(--cyan)); color: white; padding: 4px 14px; border-radius: 999px; font-size: 11px; font-weight: 600; }
-  .tier-card h3 { font-size: 18px; font-weight: 600; }
-  .tier-holdings-label { font-size: 13px; color: var(--text-dim); margin-top: 8px; }
-  .tier-holdings { font-size: 22px; font-weight: 700; color: var(--primary-light); }
-  .tier-divider { border-top: 1px solid var(--border); margin: 20px 0; }
-  .tier-stat { display: flex; justify-content: space-between; margin-bottom: 10px; }
+  /* ===== Tiers ===== */
+  .tiers-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 640px) { .tiers-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1025px) { .tiers-grid { grid-template-columns: repeat(3, 1fr); } }
+  .tier-card { background: var(--bg-card); border: 1px solid rgba(42,42,58,0.5); border-radius: 14px; padding: 26px; position: relative; }
+  .tier-card.popular { border-color: rgba(99,102,241,0.5); }
+  .tier-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--primary), var(--cyan)); color: white; padding: 3px 12px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+  .tier-card h3 { font-size: 17px; font-weight: 600; }
+  .tier-holdings-label { font-size: 12px; color: var(--text-dim); margin-top: 6px; }
+  .tier-holdings { font-size: 20px; font-weight: 700; color: var(--primary-light); }
+  .tier-divider { border-top: 1px solid var(--border); margin: 18px 0; }
+  .tier-stat { display: flex; justify-content: space-between; margin-bottom: 8px; }
   .tier-stat-label { font-size: 13px; color: var(--text-muted); }
   .tier-stat-value { font-size: 13px; font-weight: 500; }
-  .tier-features { list-style: none; margin-top: 20px; }
-  .tier-features li { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #d1d5db; margin-bottom: 10px; }
-  .tier-features li svg { width: 15px; height: 15px; color: var(--green); flex-shrink: 0; }
-  .tier-btn { width: 100%; margin-top: 28px; padding: 11px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: 1px solid var(--border); background: transparent; color: white; }
+  .tier-features { list-style: none; margin-top: 18px; }
+  .tier-features li { display: flex; align-items: center; gap: 7px; font-size: 13px; color: #d1d5db; margin-bottom: 8px; }
+  .tier-features li svg { width: 14px; height: 14px; color: var(--green); flex-shrink: 0; }
+  .tier-btn { width: 100%; margin-top: 24px; padding: 10px; border-radius: 9px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; border: 1px solid var(--border); background: transparent; color: white; }
   .tier-btn:hover { border-color: var(--primary); }
   .tier-btn.primary { background: var(--primary); border-color: var(--primary); }
   .tier-btn.primary:hover { background: var(--primary-dark); }
 
   /* ===== Security ===== */
-  .security-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-  .security-badge { display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px; border-radius: 999px; border: 1px solid rgba(74,222,128,0.3); background: rgba(74,222,128,0.08); font-size: 13px; color: var(--green); }
-  .security-text h2 { font-size: 32px; font-weight: 700; margin-top: 20px; }
-  .security-text > p { color: var(--text-muted); margin-top: 14px; font-size: 15px; line-height: 1.8; }
-  .security-features { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 28px; }
-  .security-feature { display: flex; align-items: flex-start; gap: 12px; }
-  .security-feature-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--bg-card); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .security-feature-icon svg { width: 18px; height: 18px; color: var(--primary-light); }
+  .security-grid { display: grid; grid-template-columns: 1fr; gap: 36px; align-items: start; }
+  @media (min-width: 1025px) { .security-grid { grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; } }
+  .security-badge { display: inline-flex; align-items: center; gap: 7px; padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(74,222,128,0.3); background: rgba(74,222,128,0.08); font-size: 12px; color: var(--green); }
+  .security-text h2 { font-size: 28px; font-weight: 700; margin-top: 16px; }
+  .security-text > p { color: var(--text-muted); margin-top: 12px; font-size: 14px; line-height: 1.8; }
+  .security-features { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 24px; }
+  @media (min-width: 480px) { .security-features { grid-template-columns: 1fr 1fr; } }
+  .security-feature { display: flex; align-items: flex-start; gap: 10px; }
+  .security-feature-icon { width: 36px; height: 36px; border-radius: 9px; background: var(--bg-card); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .security-feature-icon svg { width: 17px; height: 17px; color: var(--primary-light); }
   .security-feature h4 { font-size: 13px; font-weight: 500; }
-  .security-feature p { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
-  .audit-card { background: var(--bg-card); border: 1px solid rgba(42,42,58,0.5); border-radius: 16px; padding: 28px; }
-  .audit-header { display: flex; align-items: center; gap: 12px; }
-  .audit-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(74,222,128,0.1); display: flex; align-items: center; justify-content: center; }
-  .audit-icon svg { width: 22px; height: 22px; color: var(--green); }
-  .audit-header h3 { font-size: 17px; font-weight: 600; }
+  .security-feature p { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
+  .audit-card { background: var(--bg-card); border: 1px solid rgba(42,42,58,0.5); border-radius: 14px; padding: 24px; }
+  .audit-header { display: flex; align-items: center; gap: 10px; }
+  .audit-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(74,222,128,0.1); display: flex; align-items: center; justify-content: center; }
+  .audit-icon svg { width: 20px; height: 20px; color: var(--green); }
+  .audit-header h3 { font-size: 16px; font-weight: 600; }
   .audit-header p { font-size: 11px; color: var(--text-dim); }
-  .audit-items { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
-  .audit-item { display: flex; align-items: center; justify-content: space-between; background: rgba(10,10,15,0.5); border-radius: 8px; padding: 11px 14px; }
-  .audit-item-left { display: flex; align-items: center; gap: 12px; }
-  .audit-count { font-size: 22px; font-weight: 700; }
-  .audit-label { font-size: 13px; color: #d1d5db; }
-  .audit-status { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--green); }
-  .audit-note { margin-top: 20px; padding: 14px; border-radius: 8px; border: 1px solid rgba(99,102,241,0.15); background: rgba(99,102,241,0.04); font-size: 11px; color: var(--text-muted); line-height: 1.7; }
+  .audit-items { margin-top: 18px; display: flex; flex-direction: column; gap: 8px; }
+  .audit-item { display: flex; align-items: center; justify-content: space-between; background: rgba(10,10,15,0.5); border-radius: 7px; padding: 10px 12px; }
+  .audit-item-left { display: flex; align-items: center; gap: 10px; }
+  .audit-count { font-size: 20px; font-weight: 700; }
+  .audit-label { font-size: 12px; color: #d1d5db; }
+  .audit-status { display: flex; align-items: center; gap: 3px; font-size: 11px; color: var(--green); }
+  .audit-note { margin-top: 18px; padding: 12px; border-radius: 7px; border: 1px solid rgba(99,102,241,0.15); background: rgba(99,102,241,0.04); font-size: 11px; color: var(--text-muted); line-height: 1.7; }
 
   /* ===== Roadmap ===== */
-  .roadmap-list { display: flex; flex-direction: column; gap: 20px; }
-  .roadmap-item { background: var(--bg-card); border: 1px solid rgba(42,42,58,0.5); border-left: 4px solid var(--border); border-radius: 0 12px 12px 0; padding: 20px 24px; }
+  .roadmap-list { display: flex; flex-direction: column; gap: 16px; }
+  .roadmap-item { background: var(--bg-card); border: 1px solid rgba(42,42,58,0.5); border-left: 3px solid var(--border); border-radius: 0 10px 10px 0; padding: 18px 20px; }
   .roadmap-item.active { border-left-color: var(--primary); }
-  .roadmap-header { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-  .roadmap-phase { background: var(--bg); padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 500; color: var(--text-muted); }
-  .roadmap-title { font-size: 17px; font-weight: 600; }
-  .roadmap-time { font-size: 13px; color: var(--text-dim); }
-  .roadmap-status { margin-left: auto; padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 500; }
+  .roadmap-header { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .roadmap-phase { background: var(--bg); padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 500; color: var(--text-muted); }
+  .roadmap-title { font-size: 16px; font-weight: 600; }
+  .roadmap-time { font-size: 12px; color: var(--text-dim); }
+  .roadmap-status { padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 500; }
   .roadmap-status.active { background: rgba(99,102,241,0.15); color: var(--primary-light); }
   .roadmap-status.pending { background: var(--bg); color: var(--text-dim); }
-  .roadmap-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-  .roadmap-tag { background: rgba(10,10,15,0.5); padding: 5px 11px; border-radius: 6px; font-size: 12px; color: var(--text-muted); }
+  .roadmap-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .roadmap-tag { background: rgba(10,10,15,0.5); padding: 4px 10px; border-radius: 5px; font-size: 11px; color: var(--text-muted); }
 
   /* ===== CTA ===== */
-  .cta-section { padding: 80px 0; }
-  .cta-card { background: var(--bg-card); border: 1px solid rgba(42,42,58,0.5); border-radius: 20px; padding: 44px; text-align: center; position: relative; overflow: hidden; }
-  .cta-glow { position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 400px; height: 250px; background: radial-gradient(circle, rgba(99,102,241,0.12), transparent 70%); filter: blur(40px); pointer-events: none; }
-  .cta-card h2 { font-size: 32px; font-weight: 700; position: relative; }
-  .cta-card p { max-width: 520px; margin: 14px auto 0; color: var(--text-muted); font-size: 15px; position: relative; }
-  .cta-buttons { display: flex; gap: 14px; justify-content: center; margin-top: 28px; flex-wrap: wrap; position: relative; }
+  .cta-section { padding: 64px 0; }
+  .cta-card { background: var(--bg-card); border: 1px solid rgba(42,42,58,0.5); border-radius: 18px; padding: 36px 24px; text-align: center; position: relative; overflow: hidden; }
+  @media (min-width: 640px) { .cta-card { padding: 44px; } }
+  .cta-glow { position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 350px; height: 200px; background: radial-gradient(circle, rgba(99,102,241,0.1), transparent 70%); filter: blur(40px); pointer-events: none; }
+  .cta-card h2 { font-size: 26px; font-weight: 700; position: relative; }
+  .cta-card p { max-width: 480px; margin: 12px auto 0; color: var(--text-muted); font-size: 14px; position: relative; }
+  .cta-buttons { display: flex; gap: 12px; justify-content: center; margin-top: 24px; flex-wrap: wrap; position: relative; }
 
   /* ===== Footer ===== */
-  .footer { border-top: 1px solid rgba(42,42,58,0.4); background: rgba(10,10,15,0.7); padding: 44px 0; }
-  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; }
-  .footer-brand p { font-size: 13px; color: var(--text-dim); margin-top: 14px; max-width: 220px; line-height: 1.7; }
-  .footer-social { display: flex; gap: 10px; margin-top: 14px; }
-  .footer-social a { width: 34px; height: 34px; border-radius: 8px; background: var(--bg-card); display: flex; align-items: center; justify-content: center; color: var(--text-dim); transition: all 0.2s; }
+  .footer { border-top: 1px solid rgba(42,42,58,0.35); background: rgba(10,10,15,0.6); padding: 40px 0; }
+  .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+  .footer-brand p { font-size: 12px; color: var(--text-dim); margin-top: 12px; max-width: 200px; line-height: 1.7; }
+  .footer-social { display: flex; gap: 8px; margin-top: 12px; }
+  .footer-social a { width: 32px; height: 32px; border-radius: 7px; background: var(--bg-card); display: flex; align-items: center; justify-content: center; color: var(--text-dim); transition: all 0.15s; }
   .footer-social a:hover { color: white; background: var(--bg-card-hover); }
-  .footer-social svg { width: 16px; height: 16px; }
-  .footer-col h4 { font-size: 13px; font-weight: 600; margin-bottom: 14px; color: var(--text); }
+  .footer-social svg { width: 15px; height: 15px; }
+  .footer-col h4 { font-size: 12px; font-weight: 600; margin-bottom: 12px; color: var(--text); }
   .footer-col ul { list-style: none; }
-  .footer-col li { margin-bottom: 8px; }
-  .footer-col a { font-size: 13px; color: var(--text-dim); transition: color 0.2s; }
+  .footer-col li { margin-bottom: 7px; }
+  .footer-col a { font-size: 12px; color: var(--text-dim); transition: color 0.15s; }
   .footer-col a:hover { color: white; }
-  .footer-bottom { border-top: 1px solid rgba(42,42,58,0.4); margin-top: 40px; padding-top: 28px; text-align: center; }
+  .footer-bottom { border-top: 1px solid rgba(42,42,58,0.35); margin-top: 32px; padding-top: 24px; text-align: center; }
   .footer-bottom p { font-size: 11px; color: var(--text-dim); }
-
-  /* ===== Responsive ===== */
-  @media (max-width: 1024px) {
-    .nav-links { display: none !important; }
-    .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
-    .features-grid, .tiers-grid { grid-template-columns: repeat(2, 1fr); }
-    .steps-grid { grid-template-columns: 1fr; }
-    .security-grid { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 640px) {
-    .container { padding: 0 16px; }
-    .hero { padding: 40px 0 60px; }
-    .hero h1 { font-size: 34px; }
-    .hero p { font-size: 15px; }
-    .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    .hero-stat h3 { font-size: 24px; }
-    .features-grid, .tiers-grid { grid-template-columns: 1fr; }
-    .section { padding: 60px 0; }
-    .section-header h2, .security-text h2, .cta-card h2 { font-size: 26px; }
-    .security-features { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr; }
-    .cta-card { padding: 32px 20px; }
-    .roadmap-header { gap: 8px; }
-    .roadmap-status { margin-left: 0; width: 100%; text-align: center; }
-  }
 </style>
 </head>
 <body>
@@ -207,10 +202,10 @@
       <a href="#tiers">保单</a>
       <a href="#security">安全</a>
       <a href="#roadmap">路线图</a>
-      <a href="https://github.com/yuanlongdong/insurfi" target="_blank" class="nav-cta">GitHub</a>
+      <a href="https://github.com/yuanlongdong/insurfi" target="_blank" class="menu-cta">GitHub</a>
     </div>
     <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="菜单">
-      <svg id="menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
   </div>
   <div class="mobile-menu" id="mobile-menu">
@@ -219,39 +214,29 @@
     <a href="#tiers" onclick="toggleMenu()">保单</a>
     <a href="#security" onclick="toggleMenu()">安全</a>
     <a href="#roadmap" onclick="toggleMenu()">路线图</a>
-    <a href="https://github.com/yuanlongdong/insurfi" target="_blank" class="nav-cta">GitHub</a>
+    <a href="https://github.com/yuanlongdong/insurfi" target="_blank" class="menu-cta">GitHub</a>
   </div>
 </nav>
 
 <script>
 function toggleMenu() {
-  var menu = document.getElementById('mobile-menu');
-  menu.classList.toggle('open');
+  document.getElementById('mobile-menu').classList.toggle('open');
 }
 </script>
 
 <!-- Hero -->
 <section class="hero">
-  <div class="hero-bg">
-    <div class="hero-glow-1"></div>
-    <div class="hero-glow-2"></div>
-  </div>
+  <div class="hero-bg"><div class="hero-glow-1"></div></div>
   <div class="container">
     <div class="hero-badge">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
       BSC 链上首个交易亏损保险协议
     </div>
     <h1>交易亏损，<br><span class="hero-gradient">链上自动赔</span></h1>
     <p>持有 INSUR 代币即自动激活保单，在 DEX 交易亏损后一键理赔，BNB 秒到账。不是保本盘，不是 meme，是工具型 DeFi 保险协议。</p>
     <div class="hero-cta">
-      <a href="https://github.com/yuanlongdong/insurfi" target="_blank" class="btn-primary">
-        查看源码
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <a href="#how-it-works" class="btn-outline">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        阅读文档
-      </a>
+      <a href="https://github.com/yuanlongdong/insurfi" target="_blank" class="btn-primary">查看源码 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a href="#how-it-works" class="btn-outline"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>阅读文档</a>
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><h3>50%</h3><p>赔付比例</p></div>
@@ -265,41 +250,14 @@ function toggleMenu() {
 <!-- Features -->
 <section class="section section-alt" id="features">
   <div class="container">
-    <div class="section-header">
-      <h2>为什么选择 InsurFi</h2>
-      <p>传统 DeFi 保险只保智能合约漏洞，我们保你的交易亏损</p>
-    </div>
+    <div class="section-header"><h2>为什么选择 InsurFi</h2><p>传统 DeFi 保险只保智能合约漏洞，我们保你的交易亏损</p></div>
     <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(250,204,21,0.1)"><svg style="color:#facc15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-        <h3>链上自动校验</h3>
-        <p>买卖交易记录上链，亏损金额自动计算，无需人工审核，1个区块内完成赔付。</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(99,102,241,0.1)"><svg style="color:#818cf8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/></svg></div>
-        <h3>持仓即参保</h3>
-        <p>持有 ≥1000 INSUR 自动激活保单，无需额外支付保费，无需手动购买。</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(74,222,128,0.1)"><svg style="color:#4ade80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg></div>
-        <h3>BNB 秒级赔付</h3>
-        <p>赔付以 BNB 直接到账，价值稳定，可立即使用。不是项目代币，没有抛压。</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(34,211,238,0.1)"><svg style="color:#22d3ee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3>三重风控防护</h3>
-        <p>24小时等待期 + 10%免赔额 + 月度限额，防止逆向选择和道德风险。</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(168,85,247,0.1)"><svg style="color:#a855f7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-        <h3>防骗保机制</h3>
-        <p>持仓快照 + 交易对去重 + 买卖时间校验 + 闪电贷防护，多重机制确保安全。</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(251,146,60,0.1)"><svg style="color:#fb923c" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
-        <h3>三级保单分级</h3>
-        <p>基础版/进阶版/尊享版，持仓量决定赔付上限，最高单笔赔付 2 BNB。</p>
-      </div>
+      <div class="feature-card"><div class="feature-icon" style="background:rgba(250,204,21,0.1)"><svg style="color:#facc15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><h3>链上自动校验</h3><p>买卖交易记录上链，亏损金额自动计算，无需人工审核，1个区块内完成赔付。</p></div>
+      <div class="feature-card"><div class="feature-icon" style="background:rgba(99,102,241,0.1)"><svg style="color:#818cf8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/></svg></div><h3>持仓即参保</h3><p>持有 ≥1000 INSUR 自动激活保单，无需额外支付保费，无需手动购买。</p></div>
+      <div class="feature-card"><div class="feature-icon" style="background:rgba(74,222,128,0.1)"><svg style="color:#4ade80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg></div><h3>BNB 秒级赔付</h3><p>赔付以 BNB 直接到账，价值稳定，可立即使用。不是项目代币，没有抛压。</p></div>
+      <div class="feature-card"><div class="feature-icon" style="background:rgba(34,211,238,0.1)"><svg style="color:#22d3ee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>三重风控防护</h3><p>24小时等待期 + 10%免赔额 + 月度限额，防止逆向选择和道德风险。</p></div>
+      <div class="feature-card"><div class="feature-icon" style="background:rgba(168,85,247,0.1)"><svg style="color:#a855f7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h3>防骗保机制</h3><p>持仓快照 + 交易对去重 + 买卖时间校验 + 闪电贷防护，多重机制确保安全。</p></div>
+      <div class="feature-card"><div class="feature-icon" style="background:rgba(251,146,60,0.1)"><svg style="color:#fb923c" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div><h3>三级保单分级</h3><p>基础版/进阶版/尊享版，持仓量决定赔付上限，最高单笔赔付 2 BNB。</p></div>
     </div>
   </div>
 </section>
@@ -307,29 +265,11 @@ function toggleMenu() {
 <!-- How it works -->
 <section class="section" id="how-it-works">
   <div class="container">
-    <div class="section-header">
-      <h2>三步完成理赔</h2>
-      <p>从持仓参保到 BNB 到账，全程链上自动，无需人工干预</p>
-    </div>
+    <div class="section-header"><h2>三步完成理赔</h2><p>从持仓参保到 BNB 到账，全程链上自动，无需人工干预</p></div>
     <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-number">01</div>
-        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/></svg></div>
-        <h3>持仓激活保单</h3>
-        <p>买入并持有 ≥1000 INSUR 代币，等待 24 小时后保单自动激活。持仓量决定保单等级和赔付上限。</p>
-      </div>
-      <div class="step-card">
-        <div class="step-number">02</div>
-        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></div>
-        <h3>通过 DEXRouter 交易</h3>
-        <p>在 InsurFi DApp 内通过 DEXRouter 进行代币买卖，每笔交易自动上链记录，作为理赔依据。</p>
-      </div>
-      <div class="step-card">
-        <div class="step-number">03</div>
-        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg></div>
-        <h3>亏损一键理赔</h3>
-        <p>卖出亏损后，在理赔页面选择买卖交易对，点击理赔。链上自动校验，BNB 秒到钱包。</p>
-      </div>
+      <div class="step-card"><div class="step-number">01</div><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/></svg></div><h3>持仓激活保单</h3><p>买入并持有 ≥1000 INSUR 代币，等待 24 小时后保单自动激活。持仓量决定保单等级和赔付上限。</p></div>
+      <div class="step-card"><div class="step-number">02</div><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></div><h3>通过 DEXRouter 交易</h3><p>在 InsurFi DApp 内通过 DEXRouter 进行代币买卖，每笔交易自动上链记录，作为理赔依据。</p></div>
+      <div class="step-card"><div class="step-number">03</div><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg></div><h3>亏损一键理赔</h3><p>卖出亏损后，在理赔页面选择买卖交易对，点击理赔。链上自动校验，BNB 秒到钱包。</p></div>
     </div>
   </div>
 </section>
@@ -337,57 +277,11 @@ function toggleMenu() {
 <!-- Policy Tiers -->
 <section class="section section-alt" id="tiers">
   <div class="container">
-    <div class="section-header">
-      <h2>保单分级</h2>
-      <p>持仓量决定保单等级，持有越多，赔付上限越高</p>
-    </div>
+    <div class="section-header"><h2>保单分级</h2><p>持仓量决定保单等级，持有越多，赔付上限越高</p></div>
     <div class="tiers-grid">
-      <div class="tier-card">
-        <h3>基础版</h3>
-        <p class="tier-holdings-label">最低持仓</p>
-        <p class="tier-holdings">1,000 INSUR</p>
-        <div class="tier-divider"></div>
-        <div class="tier-stat"><span class="tier-stat-label">赔付比例</span><span class="tier-stat-value">50%</span></div>
-        <div class="tier-stat"><span class="tier-stat-label">单笔上限</span><span class="tier-stat-value">0.5 BNB</span></div>
-        <ul class="tier-features">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>交易亏损赔付</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>链上自动校验</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>BNB 秒级到账</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>三重风控保护</li>
-        </ul>
-        <button class="tier-btn">买入 1000 INSUR</button>
-      </div>
-      <div class="tier-card popular">
-        <div class="tier-badge">最受欢迎</div>
-        <h3>进阶版</h3>
-        <p class="tier-holdings-label">最低持仓</p>
-        <p class="tier-holdings">5,000 INSUR</p>
-        <div class="tier-divider"></div>
-        <div class="tier-stat"><span class="tier-stat-label">赔付比例</span><span class="tier-stat-value">50%</span></div>
-        <div class="tier-stat"><span class="tier-stat-label">单笔上限</span><span class="tier-stat-value">1 BNB</span></div>
-        <ul class="tier-features">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>基础版全部功能</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>赔付上限翻倍</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>优先客服支持</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>治理投票权</li>
-        </ul>
-        <button class="tier-btn primary">买入 5000 INSUR</button>
-      </div>
-      <div class="tier-card">
-        <h3>尊享版</h3>
-        <p class="tier-holdings-label">最低持仓</p>
-        <p class="tier-holdings">20,000 INSUR</p>
-        <div class="tier-divider"></div>
-        <div class="tier-stat"><span class="tier-stat-label">赔付比例</span><span class="tier-stat-value">50%</span></div>
-        <div class="tier-stat"><span class="tier-stat-label">单笔上限</span><span class="tier-stat-value">2 BNB</span></div>
-        <ul class="tier-features">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>进阶版全部功能</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>最高赔付上限</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>API 接入权限</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>专属客户经理</li>
-        </ul>
-        <button class="tier-btn">买入 20000 INSUR</button>
-      </div>
+      <div class="tier-card"><h3>基础版</h3><p class="tier-holdings-label">最低持仓</p><p class="tier-holdings">1,000 INSUR</p><div class="tier-divider"></div><div class="tier-stat"><span class="tier-stat-label">赔付比例</span><span class="tier-stat-value">50%</span></div><div class="tier-stat"><span class="tier-stat-label">单笔上限</span><span class="tier-stat-value">0.5 BNB</span></div><ul class="tier-features"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>交易亏损赔付</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>链上自动校验</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>BNB 秒级到账</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>三重风控保护</li></ul><button class="tier-btn">买入 1000 INSUR</button></div>
+      <div class="tier-card popular"><div class="tier-badge">最受欢迎</div><h3>进阶版</h3><p class="tier-holdings-label">最低持仓</p><p class="tier-holdings">5,000 INSUR</p><div class="tier-divider"></div><div class="tier-stat"><span class="tier-stat-label">赔付比例</span><span class="tier-stat-value">50%</span></div><div class="tier-stat"><span class="tier-stat-label">单笔上限</span><span class="tier-stat-value">1 BNB</span></div><ul class="tier-features"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>基础版全部功能</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>赔付上限翻倍</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>优先客服支持</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>治理投票权</li></ul><button class="tier-btn primary">买入 5000 INSUR</button></div>
+      <div class="tier-card"><h3>尊享版</h3><p class="tier-holdings-label">最低持仓</p><p class="tier-holdings">20,000 INSUR</p><div class="tier-divider"></div><div class="tier-stat"><span class="tier-stat-label">赔付比例</span><span class="tier-stat-value">50%</span></div><div class="tier-stat"><span class="tier-stat-label">单笔上限</span><span class="tier-stat-value">2 BNB</span></div><ul class="tier-features"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>进阶版全部功能</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>最高赔付上限</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>API 接入权限</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>专属客户经理</li></ul><button class="tier-btn">买入 20000 INSUR</button></div>
     </div>
   </div>
 </section>
@@ -397,53 +291,23 @@ function toggleMenu() {
   <div class="container">
     <div class="security-grid">
       <div class="security-text">
-        <div class="security-badge">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          安全优先
-        </div>
+        <div class="security-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>安全优先</div>
         <h2>经过全面安全审计</h2>
         <p>5 个核心合约经过逐行安全审计，发现并修复 9 个安全问题，包括 2 个高危漏洞。主网上线前将进行第三方专业审计。</p>
         <div class="security-features">
-          <div class="security-feature">
-            <div class="security-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-            <div><h4>持仓时间锁</h4><p>10区块防闪电贷</p></div>
-          </div>
-          <div class="security-feature">
-            <div class="security-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></div>
-            <div><h4>免赔额机制</h4><p>前10%亏损不赔</p></div>
-          </div>
-          <div class="security-feature">
-            <div class="security-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-            <div><h4>月度限额</h4><p>5次/5 BNB上限</p></div>
-          </div>
-          <div class="security-feature">
-            <div class="security-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-            <div><h4>交易对去重</h4><p>防止重复理赔</p></div>
-          </div>
+          <div class="security-feature"><div class="security-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><h4>持仓时间锁</h4><p>10区块防闪电贷</p></div></div>
+          <div class="security-feature"><div class="security-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></div><div><h4>免赔额机制</h4><p>前10%亏损不赔</p></div></div>
+          <div class="security-feature"><div class="security-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><h4>月度限额</h4><p>5次/5 BNB上限</p></div></div>
+          <div class="security-feature"><div class="security-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div><h4>交易对去重</h4><p>防止重复理赔</p></div></div>
         </div>
       </div>
       <div class="audit-card">
-        <div class="audit-header">
-          <div class="audit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <div><h3>安全审计报告</h3><p>v1.0 · 2026-08-28</p></div>
-        </div>
+        <div class="audit-header"><div class="audit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><h3>安全审计报告</h3><p>v1.0 · 2026-08-28</p></div></div>
         <div class="audit-items">
-          <div class="audit-item">
-            <div class="audit-item-left"><span class="audit-count" style="color:#f87171">2</span><span class="audit-label">高危问题</span></div>
-            <span class="audit-status"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>已修复</span>
-          </div>
-          <div class="audit-item">
-            <div class="audit-item-left"><span class="audit-count" style="color:#fb923c">3</span><span class="audit-label">中危问题</span></div>
-            <span class="audit-status"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>已修复</span>
-          </div>
-          <div class="audit-item">
-            <div class="audit-item-left"><span class="audit-count" style="color:#facc15">4</span><span class="audit-label">低危问题</span></div>
-            <span class="audit-status"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>已修复</span>
-          </div>
-          <div class="audit-item">
-            <div class="audit-item-left"><span class="audit-count" style="color:#60a5fa">5</span><span class="audit-label">优化建议</span></div>
-            <span class="audit-status" style="color:#9ca3af"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>记录中</span>
-          </div>
+          <div class="audit-item"><div class="audit-item-left"><span class="audit-count" style="color:#f87171">2</span><span class="audit-label">高危问题</span></div><span class="audit-status"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>已修复</span></div>
+          <div class="audit-item"><div class="audit-item-left"><span class="audit-count" style="color:#fb923c">3</span><span class="audit-label">中危问题</span></div><span class="audit-status"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>已修复</span></div>
+          <div class="audit-item"><div class="audit-item-left"><span class="audit-count" style="color:#facc15">4</span><span class="audit-label">低危问题</span></div><span class="audit-status"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>已修复</span></div>
+          <div class="audit-item"><div class="audit-item-left"><span class="audit-count" style="color:#60a5fa">5</span><span class="audit-label">优化建议</span></div><span class="audit-status" style="color:#9ca3af"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>记录中</span></div>
         </div>
         <div class="audit-note">主网上线前必须完成：第三方专业审计（CertiK/SlowMist/PeckShield）、测试网运行 ≥2 周、多签钱包配置、紧急响应预案。</div>
       </div>
@@ -454,67 +318,12 @@ function toggleMenu() {
 <!-- Roadmap -->
 <section class="section section-alt" id="roadmap">
   <div class="container">
-    <div class="section-header">
-      <h2>发展路线图</h2>
-      <p>从 BSC 交易亏损保险到模块化保险中间件</p>
-    </div>
+    <div class="section-header"><h2>发展路线图</h2><p>从 BSC 交易亏损保险到模块化保险中间件</p></div>
     <div class="roadmap-list">
-      <div class="roadmap-item active">
-        <div class="roadmap-header">
-          <span class="roadmap-phase">阶段 1</span>
-          <span class="roadmap-title">测试网验证</span>
-          <span class="roadmap-time">2026 Q3</span>
-          <span class="roadmap-status active">进行中</span>
-        </div>
-        <div class="roadmap-tags">
-          <span class="roadmap-tag">BSC 测试网部署</span>
-          <span class="roadmap-tag">100 名测试用户</span>
-          <span class="roadmap-tag">风控参数调优</span>
-          <span class="roadmap-tag">第三方安全审计</span>
-        </div>
-      </div>
-      <div class="roadmap-item">
-        <div class="roadmap-header">
-          <span class="roadmap-phase">阶段 2</span>
-          <span class="roadmap-title">主网软启动</span>
-          <span class="roadmap-time">2026 Q4</span>
-          <span class="roadmap-status pending">待开始</span>
-        </div>
-        <div class="roadmap-tags">
-          <span class="roadmap-tag">主网上线（保守参数）</span>
-          <span class="roadmap-tag">保险池 ≤100 BNB</span>
-          <span class="roadmap-tag">1000 名种子用户</span>
-          <span class="roadmap-tag">首批赔付记录</span>
-        </div>
-      </div>
-      <div class="roadmap-item">
-        <div class="roadmap-header">
-          <span class="roadmap-phase">阶段 3</span>
-          <span class="roadmap-title">增长期</span>
-          <span class="roadmap-time">2027 Q1-Q2</span>
-          <span class="roadmap-status pending">待开始</span>
-        </div>
-        <div class="roadmap-tags">
-          <span class="roadmap-tag">放宽风控参数</span>
-          <span class="roadmap-tag">接入更多 DEX</span>
-          <span class="roadmap-tag">流动性挖矿</span>
-          <span class="roadmap-tag">用户 5000-10000</span>
-        </div>
-      </div>
-      <div class="roadmap-item">
-        <div class="roadmap-header">
-          <span class="roadmap-phase">阶段 4</span>
-          <span class="roadmap-title">生态扩展</span>
-          <span class="roadmap-time">2027 Q3+</span>
-          <span class="roadmap-status pending">待开始</span>
-        </div>
-        <div class="roadmap-tags">
-          <span class="roadmap-tag">保险模块对外输出</span>
-          <span class="roadmap-tag">跨链扩展</span>
-          <span class="roadmap-tag">机构级方案</span>
-          <span class="roadmap-tag">被收购/独立发展</span>
-        </div>
-      </div>
+      <div class="roadmap-item active"><div class="roadmap-header"><span class="roadmap-phase">阶段 1</span><span class="roadmap-title">测试网验证</span><span class="roadmap-time">2026 Q3</span><span class="roadmap-status active">进行中</span></div><div class="roadmap-tags"><span class="roadmap-tag">BSC 测试网部署</span><span class="roadmap-tag">100 名测试用户</span><span class="roadmap-tag">风控参数调优</span><span class="roadmap-tag">第三方安全审计</span></div></div>
+      <div class="roadmap-item"><div class="roadmap-header"><span class="roadmap-phase">阶段 2</span><span class="roadmap-title">主网软启动</span><span class="roadmap-time">2026 Q4</span><span class="roadmap-status pending">待开始</span></div><div class="roadmap-tags"><span class="roadmap-tag">主网上线（保守参数）</span><span class="roadmap-tag">保险池 ≤100 BNB</span><span class="roadmap-tag">1000 名种子用户</span><span class="roadmap-tag">首批赔付记录</span></div></div>
+      <div class="roadmap-item"><div class="roadmap-header"><span class="roadmap-phase">阶段 3</span><span class="roadmap-title">增长期</span><span class="roadmap-time">2027 Q1-Q2</span><span class="roadmap-status pending">待开始</span></div><div class="roadmap-tags"><span class="roadmap-tag">放宽风控参数</span><span class="roadmap-tag">接入更多 DEX</span><span class="roadmap-tag">流动性挖矿</span><span class="roadmap-tag">用户 5000-10000</span></div></div>
+      <div class="roadmap-item"><div class="roadmap-header"><span class="roadmap-phase">阶段 4</span><span class="roadmap-title">生态扩展</span><span class="roadmap-time">2027 Q3+</span><span class="roadmap-status pending">待开始</span></div><div class="roadmap-tags"><span class="roadmap-tag">保险模块对外输出</span><span class="roadmap-tag">跨链扩展</span><span class="roadmap-tag">机构级方案</span><span class="roadmap-tag">被收购/独立发展</span></div></div>
     </div>
   </div>
 </section>
@@ -527,14 +336,8 @@ function toggleMenu() {
       <h2>准备好保护你的交易了吗？</h2>
       <p>持有 INSUR，交易亏损不再裸奔。加入 BSC 链上首个交易亏损保险协议。</p>
       <div class="cta-buttons">
-        <a href="https://github.com/yuanlongdong/insurfi" target="_blank" class="btn-primary">
-          立即开始
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <a href="https://github.com/yuanlongdong/insurfi" target="_blank" class="btn-outline">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-          查看源码
-        </a>
+        <a href="https://github.com/yuanlongdong/insurfi" target="_blank" class="btn-primary">立即开始 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="https://github.com/yuanlongdong/insurfi" target="_blank" class="btn-outline"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>查看源码</a>
       </div>
     </div>
   </div>
@@ -544,47 +347,12 @@ function toggleMenu() {
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#" class="logo">
-          <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          InsurFi
-        </a>
-        <p>BSC 链上交易亏损保险协议</p>
-        <div class="footer-social">
-          <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
-          <a href="https://github.com/yuanlongdong/insurfi" target="_blank" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>产品</h4>
-        <ul>
-          <li><a href="#features">核心功能</a></li>
-          <li><a href="#tiers">保单分级</a></li>
-          <li><a href="#security">安全审计</a></li>
-          <li><a href="#roadmap">路线图</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>资源</h4>
-        <ul>
-          <li><a href="https://github.com/yuanlongdong/insurfi/tree/main/docs" target="_blank">文档</a></li>
-          <li><a href="https://github.com/yuanlongdong/insurfi" target="_blank">GitHub</a></li>
-          <li><a href="#">白皮书</a></li>
-          <li><a href="#">审计报告</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>合约地址</h4>
-        <ul>
-          <li><a href="#" style="font-size:12px">INSUR: 待部署</a></li>
-          <li><a href="#" style="font-size:12px">Pool: 待部署</a></li>
-          <li><a href="#" style="font-size:12px">Verifier: 待部署</a></li>
-        </ul>
-      </div>
+      <div class="footer-brand"><a href="#" class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>InsurFi</a><p>BSC 链上交易亏损保险协议</p><div class="footer-social"><a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a><a href="https://github.com/yuanlongdong/insurfi" target="_blank" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></div></div>
+      <div class="footer-col"><h4>产品</h4><ul><li><a href="#features">核心功能</a></li><li><a href="#tiers">保单分级</a></li><li><a href="#security">安全审计</a></li><li><a href="#roadmap">路线图</a></li></ul></div>
+      <div class="footer-col"><h4>资源</h4><ul><li><a href="https://github.com/yuanlongdong/insurfi/tree/main/docs" target="_blank">文档</a></li><li><a href="https://github.com/yuanlongdong/insurfi" target="_blank">GitHub</a></li><li><a href="#">白皮书</a></li><li><a href="#">审计报告</a></li></ul></div>
+      <div class="footer-col"><h4>合约地址</h4><ul><li><a href="#" style="font-size:11px">INSUR: 待部署</a></li><li><a href="#" style="font-size:11px">Pool: 待部署</a></li><li><a href="#" style="font-size:11px">Verifier: 待部署</a></li></ul></div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 InsurFi. 本协议不构成金融建议，使用前请了解风险。</p>
-    </div>
+    <div class="footer-bottom"><p>© 2026 InsurFi. 本协议不构成金融建议，使用前请了解风险。</p></div>
   </div>
 </footer>
 
