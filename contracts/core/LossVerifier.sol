@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import {ILossVerifier} from "./ILossVerifier.sol";
-import {IInsurancePool} from "./IInsurancePool.sol";
-import {IPolicyManager} from "./IPolicyManager.sol";
-import {IDEXRouter} from "./IDEXRouter.sol";
-import {IInsurToken} from "./IInsurToken.sol";
+import {ILossVerifier} from "../interfaces/ILossVerifier.sol";
+import {IInsurancePool} from "../interfaces/IInsurancePool.sol";
+import {IPolicyManager} from "../interfaces/IPolicyManager.sol";
+import {IDEXRouter} from "../interfaces/IDEXRouter.sol";
+import {IInsurToken} from "../interfaces/IInsurToken.sol";
 
 /**
  * @title LossVerifier
@@ -84,8 +84,6 @@ contract LossVerifier is ILossVerifier {
         require(buyTrade.blockNumber < sellTrade.blockNumber, "LossVerifier: buy after sell");
 
         // 6. Calculate loss (ETH spent - ETH received)
-        // buyTrade.amountIn = ETH spent (wei)
-        // sellTrade.amountOut = ETH received (wei)
         uint256 ethSpent = buyTrade.amountIn;
         uint256 ethReceived = sellTrade.amountOut;
         require(ethSpent > ethReceived, "LossVerifier: no loss");

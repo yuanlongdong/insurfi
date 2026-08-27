@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import {IPolicyManager} from "./IPolicyManager.sol";
-import {IInsurToken} from "./IInsurToken.sol";
+import {IPolicyManager} from "../interfaces/IPolicyManager.sol";
+import {IInsurToken} from "../interfaces/IInsurToken.sol";
 
 /**
  * @title PolicyManager
  * @notice Manages user insurance policy status based on INSUR token holdings.
  * @dev Policies are activated automatically when holdings meet the minimum threshold.
- *      Tiered coverage: higher INSUR holdings → higher BNB coverage limit.
+ *      Tiered coverage: higher INSUR holdings -> higher BNB coverage limit.
  *      Historical policy validity uses token balance snapshots (anti post-loss insurance).
  */
 contract PolicyManager is IPolicyManager {
@@ -31,7 +31,7 @@ contract PolicyManager is IPolicyManager {
         owner = msg.sender;
         insurToken = IInsurToken(_insurToken);
         minHoldingThreshold = _threshold;
-        // Default tiers: [min holding in INSUR (1e18)] → [coverage in BNB (wei)]
+        // Default tiers: [min holding in INSUR (1e18)] -> [coverage in BNB (wei)]
         _holdingTiers = [1000 * 1e18, 5000 * 1e18, 20000 * 1e18];
         _coverageTiers = [0.1 ether, 0.5 ether, 2 ether];
     }

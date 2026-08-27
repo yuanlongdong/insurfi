@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import {IDEXRouter} from "./IDEXRouter.sol";
+import {IDEXRouter} from "../interfaces/IDEXRouter.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
@@ -34,7 +34,6 @@ contract DEXRouter is IDEXRouter {
         owner = msg.sender;
         pancakeRouter = _pancakeRouter;
         isSupportedDEX[_pancakeRouter] = true;
-        // WETH address will be set from router in setPancakeRouter or constructor fallback
         WETH = address(0); // resolved lazily
     }
 
@@ -78,7 +77,7 @@ contract DEXRouter is IDEXRouter {
         require(deadline >= block.timestamp, "DEXRouter: expired");
 
         IERC20(path[0]).safeTransferFrom(msg.sender, address(this), amountIn);
-        IERC20(path[0]).safeApprove(pancakeRouter, amountIn);
+        IERC20(path[0]).forceApprove(pancakeRouter, amountIn);
 
         uint256 amountOut = _swapExactTokensForETH(amountIn, amountOutMin, path, deadline);
         tradeId = _recordTrade(msg.sender, path[0], path[path.length - 1], amountIn, amountOut, false);
@@ -177,9 +176,7 @@ contract DEXRouter is IDEXRouter {
         );
         require(success, "DEXRouter: token swap failed");
         uint256[] memory amounts = abi.decode(data, (uint256[]));
-        uint256 ethOut = amounts[amounts.length - 1];
-        // Forward ETH to user (PancakeRouter sends to `to` which is msg.sender)
-        return ethOut;
+        return amounts[amounts.length - 1];
     }
 
     receive() external payable {}

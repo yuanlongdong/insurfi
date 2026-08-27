@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import {IInsurancePool} from "./IInsurancePool.sol";
-import {ILossVerifier} from "./ILossVerifier.sol";
+import {IInsurancePool} from "../interfaces/IInsurancePool.sol";
 import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 /**
