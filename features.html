@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>核心功能 - InsurFi</title>
-<meta name="description" content="InsurFi 核心功能：持仓即参保、链上自动校验、BNB秒级赔付、三重风控防护、防骗保机制、三级保单分级。">
+<title>Core Features - InsurFi</title>
+<meta name="description" content="InsurFi core features: hold-to-insure, on-chain auto verification, BNB instant payout, triple risk protection, anti-fraud mechanism, three-tier policy system.">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0a0a0f;--bg-card:#12121a;--bg-card-hover:#1a1a25;--border:#2a2a3a;--text:#fff;--text-muted:#9ca3af;--text-dim:#6b7280;--primary:#6366f1;--primary-light:#818cf8;--primary-dark:#4f46e5;--cyan:#22d3ee;--green:#4ade80;--yellow:#facc15;--orange:#fb923c;--purple:#a855f7;--radius:12px;--radius-sm:8px;--radius-lg:16px}
@@ -115,23 +115,23 @@ a{color:inherit;text-decoration:none}
   <div class="nav-inner">
     <a href="index.html" class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>InsurFi</a>
     <div class="nav-links">
-      <a href="index.html">首页</a>
-      <a href="features.html" class="active">功能</a>
-      <a href="how-it-works.html">原理</a>
-      <a href="tiers.html">保单</a>
-      <a href="security.html">安全</a>
-      <a href="roadmap.html">路线图</a>
+      <a href="index.html">Home</a>
+      <a href="features.html" class="active">Features</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="tiers.html">Policies</a>
+      <a href="security.html">Security</a>
+      <a href="roadmap.html">Roadmap</a>
       <a href="https://github.com/yuanlongdong/insurfi" target="_blank" class="nav-cta">GitHub</a>
     </div>
-    <button class="hamburger" onclick="toggleMenu()" aria-label="菜单"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
   </div>
   <div class="mobile-menu" id="mobile-menu">
-    <a href="index.html" onclick="toggleMenu()">首页</a>
-    <a href="features.html" class="active" onclick="toggleMenu()">功能</a>
-    <a href="how-it-works.html" onclick="toggleMenu()">原理</a>
-    <a href="tiers.html" onclick="toggleMenu()">保单</a>
-    <a href="security.html" onclick="toggleMenu()">安全</a>
-    <a href="roadmap.html" onclick="toggleMenu()">路线图</a>
+    <a href="index.html" onclick="toggleMenu()">Home</a>
+    <a href="features.html" class="active" onclick="toggleMenu()">Features</a>
+    <a href="how-it-works.html" onclick="toggleMenu()">How It Works</a>
+    <a href="tiers.html" onclick="toggleMenu()">Policies</a>
+    <a href="security.html" onclick="toggleMenu()">Security</a>
+    <a href="roadmap.html" onclick="toggleMenu()">Roadmap</a>
     <a href="https://github.com/yuanlongdong/insurfi" target="_blank" class="menu-cta">GitHub</a>
   </div>
 </nav>
@@ -139,21 +139,21 @@ a{color:inherit;text-decoration:none}
 
 <div class="page-header">
   <div class="container">
-    <div class="breadcrumb"><a href="index.html">首页</a><span>/</span><span>核心功能</span></div>
-    <h1>六大核心功能</h1>
-    <p>从持仓参保到 BNB 到账，每一个环节都经过精心设计，确保安全、高效、透明。</p>
+    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Core Features</span></div>
+    <h1>Six Core Features</h1>
+    <p>From holding to BNB payout, every step is carefully designed to ensure security, efficiency, and transparency.</p>
   </div>
 </div>
 
 <section class="section">
   <div class="container">
     <div class="grid">
-      <div class="card"><div class="card-icon" style="background:rgba(250,204,21,0.1)"><svg style="color:#facc15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><h3>链上自动校验</h3><p>买卖交易记录上链，亏损金额自动计算，无需人工审核，1个区块内完成赔付。</p></div>
-      <div class="card"><div class="card-icon" style="background:rgba(99,102,241,0.1)"><svg style="color:#818cf8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/></svg></div><h3>持仓即参保</h3><p>持有 ≥1000 INSUR 自动激活保单，无需额外支付保费，无需手动购买。</p></div>
-      <div class="card"><div class="card-icon" style="background:rgba(74,222,128,0.1)"><svg style="color:#4ade80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg></div><h3>BNB 秒级赔付</h3><p>赔付以 BNB 直接到账，价值稳定，可立即使用。不是项目代币，没有抛压。</p></div>
-      <div class="card"><div class="card-icon" style="background:rgba(34,211,238,0.1)"><svg style="color:#22d3ee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>三重风控防护</h3><p>24小时等待期 + 10%免赔额 + 月度限额，防止逆向选择和道德风险。</p></div>
-      <div class="card"><div class="card-icon" style="background:rgba(168,85,247,0.1)"><svg style="color:#a855f7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h3>防骗保机制</h3><p>持仓快照 + 交易对去重 + 买卖时间校验 + 闪电贷防护，多重机制确保安全。</p></div>
-      <div class="card"><div class="card-icon" style="background:rgba(251,146,60,0.1)"><svg style="color:#fb923c" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div><h3>三级保单分级</h3><p>基础版/进阶版/尊享版，持仓量决定赔付上限，最高单笔赔付 2 BNB。</p></div>
+      <div class="card"><div class="card-icon" style="background:rgba(250,204,21,0.1)"><svg style="color:#facc15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><h3>On-Chain Auto Verification</h3><p>Buy and sell transactions are recorded on-chain, loss amounts are automatically calculated, no manual review required, payout completed within one block.</p></div>
+      <div class="card"><div class="card-icon" style="background:rgba(99,102,241,0.1)"><svg style="color:#818cf8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/></svg></div><h3>Hold to Insure</h3><p>Hold ≥1000 INSUR to automatically activate your policy. No extra premium, no manual purchase.</p></div>
+      <div class="card"><div class="card-icon" style="background:rgba(74,222,128,0.1)"><svg style="color:#4ade80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg></div><h3>BNB Instant Payout</h3><p>Payouts arrive directly in BNB, stable value, ready to use. Not a project token, no sell pressure.</p></div>
+      <div class="card"><div class="card-icon" style="background:rgba(34,211,238,0.1)"><svg style="color:#22d3ee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Triple Risk Protection</h3><p>24-hour waiting period + 10% deductible + monthly limit to prevent adverse selection and moral hazard.</p></div>
+      <div class="card"><div class="card-icon" style="background:rgba(168,85,247,0.1)"><svg style="color:#a855f7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h3>Anti-Fraud Mechanism</h3><p>Holding snapshot + trading pair deduplication + buy/sell time verification + flash loan protection, multiple mechanisms ensure security.</p></div>
+      <div class="card"><div class="card-icon" style="background:rgba(251,146,60,0.1)"><svg style="color:#fb923c" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div><h3>Three-Tier Policy System</h3><p>Basic/Advanced/Premium tiers, holding amount determines payout cap, maximum single payout 2 BNB.</p></div>
     </div>
   </div>
 </section>
@@ -162,16 +162,16 @@ a{color:inherit;text-decoration:none}
   <div class="container">
     <div class="feature-detail">
       <div class="feature-text">
-        <h2>持仓即参保，零摩擦体验</h2>
-        <p>传统保险需要填写问卷、支付保费、等待审核。InsurFi 彻底改变了这一流程——只要你持有足够数量的 INSUR 代币，保单就自动激活。</p>
+        <h2>Hold to Insure, Zero-Friction Experience</h2>
+        <p>Traditional insurance requires filling out questionnaires, paying premiums, and waiting for review. InsurFi completely changes this process — as long as you hold enough INSUR tokens, your policy is automatically activated.</p>
         <ul class="feature-list">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>无需额外支付保费，持仓即覆盖</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>24小时等待期后自动生效</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>持仓量决定保单等级和赔付上限</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>随时可以增持升级保单等级</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>No extra premium, holding covers you</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Automatically effective after 24-hour waiting period</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Holding amount determines policy tier and payout cap</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Increase holdings anytime to upgrade policy tier</li>
         </ul>
       </div>
-      <div class="feature-visual"><div style="text-align:center"><div style="width:64px;height:64px;margin:0 auto;background:rgba(99,102,241,0.1);border-radius:16px;display:flex;align-items:center;justify-content:center"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/></svg></div><p style="margin-top:16px;font-size:14px;color:var(--text-muted)">持有 INSUR → 自动激活保单</p></div></div>
+      <div class="feature-visual"><div style="text-align:center"><div style="width:64px;height:64px;margin:0 auto;background:rgba(99,102,241,0.1);border-radius:16px;display:flex;align-items:center;justify-content:center"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/></svg></div><p style="margin-top:16px;font-size:14px;color:var(--text-muted)">Hold INSUR → Auto-Activate Policy</p></div></div>
     </div>
   </div>
 </section>
@@ -180,11 +180,11 @@ a{color:inherit;text-decoration:none}
   <div class="container">
     <div class="cta-card">
       <div class="cta-glow"></div>
-      <h2>了解保单分级与赔付上限</h2>
-      <p>不同持仓量对应不同保单等级，选择适合你的保障方案。</p>
+      <h2>Understand Policy Tiers and Payout Caps</h2>
+      <p>Different holding amounts correspond to different policy tiers. Choose the coverage plan that suits you.</p>
       <div class="cta-buttons">
-        <a href="tiers.html" class="btn btn-primary">查看保单分级</a>
-        <a href="how-it-works.html" class="btn btn-outline">了解理赔流程</a>
+        <a href="tiers.html" class="btn btn-primary">View Policy Tiers</a>
+        <a href="how-it-works.html" class="btn btn-outline">Understand Claim Process</a>
       </div>
     </div>
   </div>
@@ -193,11 +193,11 @@ a{color:inherit;text-decoration:none}
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand"><a href="index.html" class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>InsurFi</a><p>BSC 链上交易亏损保险协议</p><div class="footer-social"><a href="https://github.com/yuanlongdong/insurfi" target="_blank" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></div></div>
-      <div class="footer-col"><h4>产品</h4><ul><li><a href="features.html">核心功能</a></li><li><a href="tiers.html">保单分级</a></li><li><a href="security.html">安全审计</a></li><li><a href="roadmap.html">路线图</a></li></ul></div>
-      <div class="footer-col"><h4>资源</h4><ul><li><a href="https://github.com/yuanlongdong/insurfi/tree/main/docs" target="_blank">文档</a></li><li><a href="https://github.com/yuanlongdong/insurfi" target="_blank">GitHub</a></li></ul></div>
+      <div class="footer-brand"><a href="index.html" class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>InsurFi</a><p>On-Chain Trading Loss Insurance Protocol on BSC</p><div class="footer-social"><a href="https://github.com/yuanlongdong/insurfi" target="_blank" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></div></div>
+      <div class="footer-col"><h4>Product</h4><ul><li><a href="features.html">Core Features</a></li><li><a href="tiers.html">Policy Tiers</a></li><li><a href="security.html">Security Audit</a></li><li><a href="roadmap.html">Roadmap</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="https://github.com/yuanlongdong/insurfi/tree/main/docs" target="_blank">Docs</a></li><li><a href="https://github.com/yuanlongdong/insurfi" target="_blank">GitHub</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><p>© 2026 InsurFi. 本协议不构成金融建议，使用前请了解风险。</p></div>
+    <div class="footer-bottom"><p>© 2026 InsurFi. This protocol does not constitute financial advice. Please understand the risks before use.</p></div>
   </div>
 </footer>
 </body>
