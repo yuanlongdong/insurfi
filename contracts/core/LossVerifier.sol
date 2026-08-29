@@ -14,10 +14,11 @@ import {IInsurToken} from "../interfaces/IInsurToken.sol";
  *      1. Validates both trades belong to the caller
  *      2. Validates buy is ETH→Token, sell is Token→ETH, same token pair
  *      3. Calculates loss = ETH spent on buy - ETH received from sell
- *      4. Checks policy was active at the sell trade block (snapshot-based)
- *      5. Checks claim not already processed
- *      6. Computes payout = min(loss * payoutRatio, coverageLimit)
- *      7. Calls InsurancePool.payout
+ *      4. Checks policy was active at the BUY trade block (snapshot-based, anti post-loss insurance)
+ *      5. Checks holding period within maxHoldingPeriod (anti selective claim)
+ *      6. Checks claim not already processed
+ *      7. Computes payout = min(loss * payoutRatio, coverageLimit)
+ *      8. Calls InsurancePool.payout
  */
 contract LossVerifier is ILossVerifier {
     address public owner;
@@ -28,6 +29,7 @@ contract LossVerifier is ILossVerifier {
 
     uint256 public override payoutRatio;   // in basis points (e.g. 5000 = 50%)
     uint256 public override minLossAmount;  // minimum loss in wei to be eligible
+    uint256 public override maxHoldingPeriod; // max seconds between buy and sell
 
     // claimId => processed (mirror of pool, checked locally too)
     mapping(bytes32 => bool) private _claims;
@@ -54,6 +56,7 @@ contract LossVerifier is ILossVerifier {
         dexRouter = IDEXRouter(_dexRouter);
         payoutRatio = 5000;     // 50% default
         minLossAmount = 0.001 ether; // 0.001 BNB minimum
+        maxHoldingPeriod = 7 days; // 7-day holding window
     }
 
     /**
@@ -83,6 +86,12 @@ contract LossVerifier is ILossVerifier {
         // 5. Validate timing: buy before sell
         require(buyTrade.blockNumber < sellTrade.blockNumber, "LossVerifier: buy after sell");
 
+        // 5b. Validate holding period within maxHoldingPeriod (anti selective claim)
+        require(
+            sellTrade.timestamp - buyTrade.timestamp <= maxHoldingPeriod,
+            "LossVerifier: holding period exceeded"
+        );
+
         // 6. Calculate loss (ETH spent - ETH received)
         uint256 ethSpent = buyTrade.amountIn;
         uint256 ethReceived = sellTrade.amountOut;
@@ -92,10 +101,11 @@ contract LossVerifier is ILossVerifier {
         // 7. Minimum loss check
         require(lossAmount >= minLossAmount, "LossVerifier: loss below minimum");
 
-        // 8. Policy active at sell block (anti post-loss insurance)
+        // 8. Policy active at BUY block (anti post-loss insurance)
+        //    User must hold INSUR BEFORE entering the trade, not after seeing a loss.
         require(
-            policyManager.isPolicyActiveAt(msg.sender, sellTrade.blockNumber),
-            "LossVerifier: policy inactive at sell time"
+            policyManager.isPolicyActiveAt(msg.sender, buyTrade.blockNumber),
+            "LossVerifier: policy inactive at buy time"
         );
 
         // 9. Calculate payout
@@ -122,6 +132,7 @@ contract LossVerifier is ILossVerifier {
                 if (!buyTrade.isBuy || sellTrade.isBuy) return (0, false);
                 if (buyTrade.tokenOut != sellTrade.tokenIn) return (0, false);
                 if (buyTrade.blockNumber >= sellTrade.blockNumber) return (0, false);
+                if (sellTrade.timestamp - buyTrade.timestamp > maxHoldingPeriod) return (0, false);
                 if (buyTrade.amountIn <= sellTrade.amountOut) return (0, false);
                 lossAmount = buyTrade.amountIn - sellTrade.amountOut;
                 if (lossAmount < minLossAmount) return (0, false);
@@ -138,6 +149,11 @@ contract LossVerifier is ILossVerifier {
 
     function setMinLossAmount(uint256 amount) external override onlyOwner {
         minLossAmount = amount;
+    }
+
+    function setMaxHoldingPeriod(uint256 period) external override onlyOwner {
+        require(period > 0, "LossVerifier: zero period");
+        maxHoldingPeriod = period;
     }
 
     function setInsurancePool(address pool) external onlyOwner {

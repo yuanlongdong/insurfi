@@ -21,8 +21,14 @@ interface IDEXRouter {
     function getUserTradeCount(address user) external view returns (uint256);
     function tradeCount() external view returns (uint256);
     function isSupportedDEX(address dex) external view returns (bool);
+    function insurancePool() external view returns (address);
+    function feeBasisPoints() external view returns (uint256);
+    function totalFeesCollected() external view returns (uint256);
     function addSupportedDEX(address dex) external;
     function removeSupportedDEX(address dex) external;
     function setPancakeRouter(address router) external;
+    function setInsurancePool(address pool) external;
+    function setFeeBasisPoints(uint256 bps) external;
     event TradeExecuted(uint256 indexed tradeId, address indexed trader, address tokenIn, address tokenOut, uint256 amountIn, uint256 amountOut, bool isBuy, uint256 timestamp);
+    event FeeCollected(address indexed trader, uint256 fee, uint256 timestamp);
 }

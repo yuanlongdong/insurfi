@@ -9,12 +9,14 @@ import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol
  * @notice Holds BNB insurance funds and executes payouts authorized by LossVerifier.
  * @dev Only the LossVerifier contract can trigger payouts. All payouts are non-reentrant.
  *      Supports emergency pause to halt payouts while allowing admin withdrawals.
+ *      Revenue comes from two sources: user deposits and trading fees collected by DEXRouter.
  */
 contract InsurancePool is IInsurancePool, ReentrancyGuard {
     address public owner;
     address public lossVerifier;
 
     uint256 public override totalDeposited;
+    uint256 public override totalFeesReceived;
     uint256 public override totalPaidOut;
     uint256 public override payoutCount;
     bool public override paused;
@@ -48,6 +50,15 @@ contract InsurancePool is IInsurancePool, ReentrancyGuard {
         require(msg.value > 0, "InsurancePool: zero deposit");
         totalDeposited += msg.value;
         emit Deposit(msg.sender, msg.value, block.timestamp);
+    }
+
+    /**
+     * @notice Receive trading fees from DEXRouter. Called by DEXRouter on every trade.
+     */
+    function depositFee() external payable override {
+        require(msg.value > 0, "InsurancePool: zero fee");
+        totalFeesReceived += msg.value;
+        emit FeeReceived(msg.sender, msg.value, block.timestamp);
     }
 
     /**
