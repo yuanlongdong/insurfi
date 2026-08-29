@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>保单分级 - InsurFi</title>
-<meta name="description" content="InsurFi 保单分级：基础版、进阶版、尊享版，持仓量决定赔付上限，最高单笔赔付 2 BNB。">
+<title>Policy Tiers - InsurFi</title>
+<meta name="description" content="InsurFi policy tiers: Basic, Advanced, Premium, holding amount determines payout cap, maximum single payout 2 BNB.">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0a0a0f;--bg-card:#12121a;--border:#2a2a3a;--text:#fff;--text-muted:#9ca3af;--text-dim:#6b7280;--primary:#6366f1;--primary-light:#818cf8;--primary-dark:#4f46e5;--cyan:#22d3ee;--green:#4ade80;--radius:12px;--radius-sm:8px;--radius-lg:16px}
@@ -122,23 +122,23 @@ a{color:inherit;text-decoration:none}
   <div class="nav-inner">
     <a href="index.html" class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>InsurFi</a>
     <div class="nav-links">
-      <a href="index.html">首页</a>
-      <a href="features.html">功能</a>
-      <a href="how-it-works.html">原理</a>
-      <a href="tiers.html" class="active">保单</a>
-      <a href="security.html">安全</a>
-      <a href="roadmap.html">路线图</a>
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="tiers.html" class="active">Policies</a>
+      <a href="security.html">Security</a>
+      <a href="roadmap.html">Roadmap</a>
       <a href="https://github.com/yuanlongdong/insurfi" target="_blank" class="nav-cta">GitHub</a>
     </div>
-    <button class="hamburger" onclick="toggleMenu()" aria-label="菜单"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
   </div>
   <div class="mobile-menu" id="mobile-menu">
-    <a href="index.html" onclick="toggleMenu()">首页</a>
-    <a href="features.html" onclick="toggleMenu()">功能</a>
-    <a href="how-it-works.html" onclick="toggleMenu()">原理</a>
-    <a href="tiers.html" class="active" onclick="toggleMenu()">保单</a>
-    <a href="security.html" onclick="toggleMenu()">安全</a>
-    <a href="roadmap.html" onclick="toggleMenu()">路线图</a>
+    <a href="index.html" onclick="toggleMenu()">Home</a>
+    <a href="features.html" onclick="toggleMenu()">Features</a>
+    <a href="how-it-works.html" onclick="toggleMenu()">How It Works</a>
+    <a href="tiers.html" class="active" onclick="toggleMenu()">Policies</a>
+    <a href="security.html" onclick="toggleMenu()">Security</a>
+    <a href="roadmap.html" onclick="toggleMenu()">Roadmap</a>
     <a href="https://github.com/yuanlongdong/insurfi" target="_blank" class="menu-cta">GitHub</a>
   </div>
 </nav>
@@ -146,43 +146,43 @@ a{color:inherit;text-decoration:none}
 
 <div class="page-header">
   <div class="container">
-    <div class="breadcrumb"><a href="index.html">首页</a><span>/</span><span>保单分级</span></div>
-    <h1>三级保单分级</h1>
-    <p>持仓量决定保单等级，持有越多，赔付上限越高。所有等级均享受 50% 赔付比例。</p>
+    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Policy Tiers</span></div>
+    <h1>Three-Tier Policy System</h1>
+    <p>Holding amount determines policy tier. The more you hold, the higher the payout cap. All tiers enjoy a 50% payout ratio.</p>
   </div>
 </div>
 
 <section class="section">
   <div class="container">
     <div class="tiers-grid">
-      <div class="tier-card"><h3>基础版</h3><p class="tier-label">最低持仓</p><p class="tier-amount">1,000 INSUR</p><div class="tier-divider"></div><div class="tier-stat"><span class="tier-stat-label">赔付比例</span><span class="tier-stat-value">50%</span></div><div class="tier-stat"><span class="tier-stat-label">单笔上限</span><span class="tier-stat-value">0.5 BNB</span></div><div class="tier-stat"><span class="tier-stat-label">月度上限</span><span class="tier-stat-value">2 BNB</span></div><ul class="tier-features"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>交易亏损赔付</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>链上自动校验</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>BNB 秒级到账</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>三重风控保护</li></ul><button class="tier-btn">了解详情</button></div>
-      <div class="tier-card popular"><div class="tier-badge">最受欢迎</div><h3>进阶版</h3><p class="tier-label">最低持仓</p><p class="tier-amount">5,000 INSUR</p><div class="tier-divider"></div><div class="tier-stat"><span class="tier-stat-label">赔付比例</span><span class="tier-stat-value">50%</span></div><div class="tier-stat"><span class="tier-stat-label">单笔上限</span><span class="tier-stat-value">1 BNB</span></div><div class="tier-stat"><span class="tier-stat-label">月度上限</span><span class="tier-stat-value">4 BNB</span></div><ul class="tier-features"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>基础版全部功能</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>赔付上限翻倍</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>优先客服支持</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>治理投票权</li></ul><button class="tier-btn primary">了解详情</button></div>
-      <div class="tier-card"><h3>尊享版</h3><p class="tier-label">最低持仓</p><p class="tier-amount">20,000 INSUR</p><div class="tier-divider"></div><div class="tier-stat"><span class="tier-stat-label">赔付比例</span><span class="tier-stat-value">50%</span></div><div class="tier-stat"><span class="tier-stat-label">单笔上限</span><span class="tier-stat-value">2 BNB</span></div><div class="tier-stat"><span class="tier-stat-label">月度上限</span><span class="tier-stat-value">8 BNB</span></div><ul class="tier-features"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>进阶版全部功能</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>最高赔付上限</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>API 接入权限</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>专属客户经理</li></ul><button class="tier-btn">了解详情</button></div>
+      <div class="tier-card"><h3>Basic</h3><p class="tier-label">Minimum Holding</p><p class="tier-amount">1,000 INSUR</p><div class="tier-divider"></div><div class="tier-stat"><span class="tier-stat-label">Payout Ratio</span><span class="tier-stat-value">50%</span></div><div class="tier-stat"><span class="tier-stat-label">Single Payout Cap</span><span class="tier-stat-value">0.5 BNB</span></div><div class="tier-stat"><span class="tier-stat-label">Monthly Cap</span><span class="tier-stat-value">2 BNB</span></div><ul class="tier-features"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Trading loss payout</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>On-chain auto verification</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>BNB instant arrival</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Triple risk protection</li></ul><button class="tier-btn">Learn More</button></div>
+      <div class="tier-card popular"><div class="tier-badge">Most Popular</div><h3>Advanced</h3><p class="tier-label">Minimum Holding</p><p class="tier-amount">5,000 INSUR</p><div class="tier-divider"></div><div class="tier-stat"><span class="tier-stat-label">Payout Ratio</span><span class="tier-stat-value">50%</span></div><div class="tier-stat"><span class="tier-stat-label">Single Payout Cap</span><span class="tier-stat-value">1 BNB</span></div><div class="tier-stat"><span class="tier-stat-label">Monthly Cap</span><span class="tier-stat-value">4 BNB</span></div><ul class="tier-features"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>All Basic features</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Doubled payout cap</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Priority customer support</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Governance voting rights</li></ul><button class="tier-btn primary">Learn More</button></div>
+      <div class="tier-card"><h3>Premium</h3><p class="tier-label">Minimum Holding</p><p class="tier-amount">20,000 INSUR</p><div class="tier-divider"></div><div class="tier-stat"><span class="tier-stat-label">Payout Ratio</span><span class="tier-stat-value">50%</span></div><div class="tier-stat"><span class="tier-stat-label">Single Payout Cap</span><span class="tier-stat-value">2 BNB</span></div><div class="tier-stat"><span class="tier-stat-label">Monthly Cap</span><span class="tier-stat-value">8 BNB</span></div><ul class="tier-features"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>All Advanced features</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Highest payout cap</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>API access</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Dedicated account manager</li></ul><button class="tier-btn">Learn More</button></div>
     </div>
   </div>
 </section>
 
 <section class="section section-alt">
   <div class="container">
-    <h2 style="font-size:22px;font-weight:700;text-align:center;margin-bottom:8px">功能对比</h2>
-    <p style="text-align:center;color:var(--text-muted);font-size:14px;margin-bottom:24px">三个保单等级详细对比，选择最适合你的方案</p>
+    <h2 style="font-size:22px;font-weight:700;text-align:center;margin-bottom:8px">Feature Comparison</h2>
+    <p style="text-align:center;color:var(--text-muted);font-size:14px;margin-bottom:24px">Detailed comparison of three policy tiers, choose the plan that suits you best</p>
     <div class="table-wrap">
       <table class="compare-table">
-        <thead><tr><th>功能</th><th>基础版</th><th>进阶版</th><th>尊享版</th></tr></thead>
+        <thead><tr><th>Feature</th><th>Basic</th><th>Advanced</th><th>Premium</th></tr></thead>
         <tbody>
-          <tr><td>最低持仓</td><td>1,000 INSUR</td><td>5,000 INSUR</td><td>20,000 INSUR</td></tr>
-          <tr><td>赔付比例</td><td>50%</td><td>50%</td><td>50%</td></tr>
-          <tr><td>单笔赔付上限</td><td>0.5 BNB</td><td>1 BNB</td><td>2 BNB</td></tr>
-          <tr><td>月度赔付上限</td><td>2 BNB</td><td>4 BNB</td><td>8 BNB</td></tr>
-          <tr><td>月度理赔次数</td><td>3 次</td><td>5 次</td><td>10 次</td></tr>
-          <tr><td>等待期</td><td>24 小时</td><td>24 小时</td><td>24 小时</td></tr>
-          <tr><td>免赔额</td><td>10%</td><td>10%</td><td>10%</td></tr>
-          <tr><td>链上自动校验</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td>BNB 秒级赔付</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td>优先客服支持</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td>治理投票权</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td>API 接入权限</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
-          <tr><td>专属客户经理</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
+          <tr><td>Minimum Holding</td><td>1,000 INSUR</td><td>5,000 INSUR</td><td>20,000 INSUR</td></tr>
+          <tr><td>Payout Ratio</td><td>50%</td><td>50%</td><td>50%</td></tr>
+          <tr><td>Single Payout Cap</td><td>0.5 BNB</td><td>1 BNB</td><td>2 BNB</td></tr>
+          <tr><td>Monthly Payout Cap</td><td>2 BNB</td><td>4 BNB</td><td>8 BNB</td></tr>
+          <tr><td>Monthly Claim Count</td><td>3</td><td>5</td><td>10</td></tr>
+          <tr><td>Waiting Period</td><td>24 hours</td><td>24 hours</td><td>24 hours</td></tr>
+          <tr><td>Deductible</td><td>10%</td><td>10%</td><td>10%</td></tr>
+          <tr><td>On-Chain Auto Verification</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>BNB Instant Payout</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>Priority Customer Support</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>Governance Voting Rights</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>API Access</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
+          <tr><td>Dedicated Account Manager</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
         </tbody>
       </table>
     </div>
@@ -193,11 +193,11 @@ a{color:inherit;text-decoration:none}
   <div class="container">
     <div class="cta-card">
       <div class="cta-glow"></div>
-      <h2>了解安全机制与风控防护</h2>
-      <p>三重风控 + 多重防骗保机制，确保保险池资金安全。</p>
+      <h2>Understand Security and Risk Protection</h2>
+      <p>Triple risk control + multiple anti-fraud mechanisms to ensure insurance pool fund security.</p>
       <div class="cta-buttons">
-        <a href="security.html" class="btn btn-primary">查看安全机制</a>
-        <a href="how-it-works.html" class="btn btn-outline">了解理赔流程</a>
+        <a href="security.html" class="btn btn-primary">View Security</a>
+        <a href="how-it-works.html" class="btn btn-outline">Understand Claim Process</a>
       </div>
     </div>
   </div>
@@ -206,11 +206,11 @@ a{color:inherit;text-decoration:none}
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand"><a href="index.html" class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>InsurFi</a><p>BSC 链上交易亏损保险协议</p><div class="footer-social"><a href="https://github.com/yuanlongdong/insurfi" target="_blank" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></div></div>
-      <div class="footer-col"><h4>产品</h4><ul><li><a href="features.html">核心功能</a></li><li><a href="tiers.html">保单分级</a></li><li><a href="security.html">安全审计</a></li><li><a href="roadmap.html">路线图</a></li></ul></div>
-      <div class="footer-col"><h4>资源</h4><ul><li><a href="https://github.com/yuanlongdong/insurfi/tree/main/docs" target="_blank">文档</a></li><li><a href="https://github.com/yuanlongdong/insurfi" target="_blank">GitHub</a></li></ul></div>
+      <div class="footer-brand"><a href="index.html" class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>InsurFi</a><p>On-Chain Trading Loss Insurance Protocol on BSC</p><div class="footer-social"><a href="https://github.com/yuanlongdong/insurfi" target="_blank" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></div></div>
+      <div class="footer-col"><h4>Product</h4><ul><li><a href="features.html">Core Features</a></li><li><a href="tiers.html">Policy Tiers</a></li><li><a href="security.html">Security Audit</a></li><li><a href="roadmap.html">Roadmap</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="https://github.com/yuanlongdong/insurfi/tree/main/docs" target="_blank">Docs</a></li><li><a href="https://github.com/yuanlongdong/insurfi" target="_blank">GitHub</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><p>© 2026 InsurFi. 本协议不构成金融建议，使用前请了解风险。</p></div>
+    <div class="footer-bottom"><p>© 2026 InsurFi. This protocol does not constitute financial advice. Please understand the risks before use.</p></div>
   </div>
 </footer>
 </body>
